@@ -1,8 +1,10 @@
 package com.financial.transaction.system.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -37,9 +39,8 @@ public class User {
 
     private String address;
 
-    @CreationTimestamp
     private Date created;
 
-    private LocalDate updated;
+    private Date updated;
 
 }
