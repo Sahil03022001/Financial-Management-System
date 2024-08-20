@@ -25,7 +25,7 @@ public class UserRequestDTO {
 
     @NotBlank(message = "Mobile number is mandatory")
     @Pattern(regexp = "^\\d{10}$", message = "Mobile number must be 10 digits")
-    private int mobNo;
+    private String mobNo;
 
     //Format -> yyyy-mm-dd
     @NotNull(message = "Date of birth is mandatory")

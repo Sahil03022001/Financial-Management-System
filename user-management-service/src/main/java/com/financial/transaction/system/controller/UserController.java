@@ -3,6 +3,7 @@ package com.financial.transaction.system.controller;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
 import com.financial.transaction.system.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public UserResponseDTO addUser(@RequestBody UserRequestDTO userRequestDTO){
+    public UserResponseDTO addUser(@Valid @RequestBody UserRequestDTO userRequestDTO){
 
          return userService.addUser(userRequestDTO);
     }

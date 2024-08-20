@@ -17,6 +17,7 @@ public class UserConvertor {
                 .lastName(userRequestDTO.getLastName())
                 .dateOfBirth(userRequestDTO.getDateOfBirth())
                 .email(userRequestDTO.getEmail())
+                .mobNo(userRequestDTO.getMobNo())
                 .address(userRequestDTO.getAddress())
                 .created(new Date())
                 .updated(new Date())

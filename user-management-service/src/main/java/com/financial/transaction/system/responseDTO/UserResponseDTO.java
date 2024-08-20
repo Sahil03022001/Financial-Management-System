@@ -25,7 +25,7 @@ public class UserResponseDTO {
     private String email;
 
     @Column(unique = true)
-    private int mobNo;
+    private String mobNo;
 
     //Format -> yyyy-mm-dd
     private Date dateOfBirth;
