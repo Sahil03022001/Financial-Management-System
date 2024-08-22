@@ -6,6 +6,7 @@ import com.financial.transaction.system.responseDTO.UserResponseDTO;
 import lombok.experimental.UtilityClass;
 
 import java.util.Date;
+import java.util.UUID;
 
 @UtilityClass
 public class UserConvertor {
@@ -26,6 +27,9 @@ public class UserConvertor {
 
     public static UserResponseDTO userToUserResponseDto(User user){
 
+        String userID = "UMS-";
+        userID += UUID.randomUUID().toString();
+
         return UserResponseDTO.builder()
                 .userId(user.getUserId())
                 .firstName(user.getFirstName())
@@ -34,6 +38,7 @@ public class UserConvertor {
                 .email(user.getEmail())
                 .address(user.getAddress())
                 .dateOfBirth(user.getDateOfBirth())
+                .userId(userID)
                 .build();
     }
 }

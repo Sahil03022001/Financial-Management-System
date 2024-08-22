@@ -2,6 +2,9 @@ package com.financial.transaction.system.service;
 
 import com.financial.transaction.system.convertor.UserConvertor;
 import com.financial.transaction.system.entity.User;
+import com.financial.transaction.system.exception.EmailAlreadyExistsException;
+import com.financial.transaction.system.exception.MobileNumberAlreadyExistsException;
+import com.financial.transaction.system.exception.UserDoesNotExist;
 import com.financial.transaction.system.repository.UserRepository;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
@@ -14,11 +17,51 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public UserResponseDTO addUser(UserRequestDTO userRequestDTO) {
+    public UserResponseDTO addUser(UserRequestDTO userRequestDTO) throws MobileNumberAlreadyExistsException, EmailAlreadyExistsException {
+
+        //CHECKS FOR MOBILE NUMBER AND EMAIL
+
+        String mobNO = userRequestDTO.getMobNo();
+        if(userRepository.findByMobNo(mobNO) != null){
+            throw new MobileNumberAlreadyExistsException("Mobile number already exists.");
+        }
+
+        String email = userRequestDTO.getEmail();
+        if(userRepository.findByEmail(email) != null){
+            throw new EmailAlreadyExistsException("Email already exists.");
+        }
 
         User user = UserConvertor.userRequestDtoToUser(userRequestDTO);
         userRepository.save(user);
 
         return UserConvertor.userToUserResponseDto(user);
+    }
+
+    public String deleteUser(int id) throws UserDoesNotExist {
+
+        User user = userRepository.findById(id);
+
+        if(user == null){
+            throw new UserDoesNotExist("User does not exist.");
+        }
+
+        userRepository.deleteById(id);
+
+        String toReturn = user.getFirstName() + "" + user.getLastName() + " is deleted from the database.";
+
+        return toReturn;
+    }
+
+    public UserResponseDTO getById(int id) throws UserDoesNotExist {
+
+        User user = userRepository.findById(id);
+
+        if(user == null){
+            throw new UserDoesNotExist("User does not exist.");
+        }
+
+        UserResponseDTO userResponseDTO = UserConvertor.userToUserResponseDto(user);
+
+        return userResponseDTO;
     }
 }

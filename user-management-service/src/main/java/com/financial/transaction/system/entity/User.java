@@ -22,7 +22,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    private String userId = UUID.randomUUID().toString();
+    private String userId;
 
     private String firstName;
 
