@@ -8,6 +8,7 @@ import com.financial.transaction.system.exception.UserDoesNotExist;
 import com.financial.transaction.system.repository.UserRepository;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,24 +38,25 @@ public class UserService {
         return UserConvertor.userToUserResponseDto(user);
     }
 
-    public String deleteUser(int id) throws UserDoesNotExist {
+    @Transactional
+    public String deleteUserByUserId(String userId) throws UserDoesNotExist {
 
-        User user = userRepository.findById(id);
+        User user = userRepository.findByUserId(userId);
 
         if(user == null){
             throw new UserDoesNotExist("User does not exist.");
         }
 
-        userRepository.deleteById(id);
+        userRepository.deleteByUserId(userId);
 
-        String toReturn = user.getFirstName() + "" + user.getLastName() + " is deleted from the database.";
+        String toReturn = user.getFirstName() + " " + user.getLastName() + " is deleted from the database.";
 
         return toReturn;
     }
 
-    public UserResponseDTO getById(int id) throws UserDoesNotExist {
+    public UserResponseDTO getByUserId(String userId) throws UserDoesNotExist {
 
-        User user = userRepository.findById(id);
+        User user = userRepository.findByUserId(userId);
 
         if(user == null){
             throw new UserDoesNotExist("User does not exist.");

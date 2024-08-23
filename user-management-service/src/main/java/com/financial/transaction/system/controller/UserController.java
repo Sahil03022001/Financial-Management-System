@@ -18,25 +18,38 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public UserResponseDTO addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) throws MobileNumberAlreadyExistsException, EmailAlreadyExistsException {
-
-         return userService.addUser(userRequestDTO);
+    public UserResponseDTO addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        UserResponseDTO response = new UserResponseDTO();
+        try {
+            response = userService.addUser(userRequestDTO);
+        } catch (Exception e) {
+            System.out.println("Exception while adding user");
+        }
+        return response;
     }
 
-    @DeleteMapping("/delete")
-    public String deleteUser(@RequestParam int id)  {
+    @DeleteMapping("/deleteByUserId")
+    public String deleteUser(@RequestParam String userId)  {
 
+        String message = "Cannot delete this user.";
         try {
-            return userService.deleteUser(id);
+            return userService.deleteUserByUserId(userId);
         } catch (UserDoesNotExist e) {
-            throw new RuntimeException(e);
+            System.out.println("Exception while deleting user with Id : " + userId);
+            return message;
         }
     }
 
-    @GetMapping("/getbyId")
-    public UserResponseDTO getById(@RequestParam int id) throws UserDoesNotExist {
+    @GetMapping("/getByUserId")
+    public UserResponseDTO getByUserId(@RequestParam String userId) {
 
-        return userService.getById(id);
+        UserResponseDTO response = new UserResponseDTO();
+        try {
+            return userService.getByUserId(userId);
+        } catch (UserDoesNotExist e) {
+            System.out.println("Exception while getting user of userId : " + userId);
+        }
+        return response;
     }
 
 }

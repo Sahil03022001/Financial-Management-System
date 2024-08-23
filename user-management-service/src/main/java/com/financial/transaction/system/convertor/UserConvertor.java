@@ -3,6 +3,7 @@ package com.financial.transaction.system.convertor;
 import com.financial.transaction.system.entity.User;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import com.financial.transaction.system.utils.UtilsManager;
 import lombok.experimental.UtilityClass;
 
 import java.util.Date;
@@ -13,9 +14,11 @@ public class UserConvertor {
 
     public static User userRequestDtoToUser(UserRequestDTO userRequestDTO){
 
+
         return User.builder()
                 .firstName(userRequestDTO.getFirstName())
                 .lastName(userRequestDTO.getLastName())
+                .userId(UtilsManager.generateRandomId())
                 .dateOfBirth(userRequestDTO.getDateOfBirth())
                 .email(userRequestDTO.getEmail())
                 .mobNo(userRequestDTO.getMobNo())
@@ -27,9 +30,6 @@ public class UserConvertor {
 
     public static UserResponseDTO userToUserResponseDto(User user){
 
-        String userID = "UMS-";
-        userID += UUID.randomUUID().toString();
-
         return UserResponseDTO.builder()
                 .userId(user.getUserId())
                 .firstName(user.getFirstName())
@@ -38,7 +38,6 @@ public class UserConvertor {
                 .email(user.getEmail())
                 .address(user.getAddress())
                 .dateOfBirth(user.getDateOfBirth())
-                .userId(userID)
                 .build();
     }
 }
