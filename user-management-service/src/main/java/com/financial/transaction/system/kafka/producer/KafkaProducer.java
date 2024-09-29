@@ -1,11 +1,15 @@
 package com.financial.transaction.system.kafka.producer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaProducer {
+
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaProducer.class);
 
     @Autowired
     private KafkaTemplate<String, Object> kafkaTemplate;
@@ -14,8 +18,8 @@ public class KafkaProducer {
         try {
             kafkaTemplate.send(topicName, key, payload);
         } catch (Exception e) {
-            System.out.println("Failed to send message to kafka : " + e.getLocalizedMessage());
+            LOG.info("Failed to send message to kafka : {}", e.getLocalizedMessage());
         }
-        System.out.println("Published event to topic " + topicName + ": " + payload);
+        LOG.info("Published event to topic: {} with payload: {}", topicName, payload);
     }
 }

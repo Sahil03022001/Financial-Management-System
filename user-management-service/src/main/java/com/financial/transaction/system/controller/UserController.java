@@ -1,18 +1,22 @@
 package com.financial.transaction.system.controller;
 
-import com.financial.transaction.system.exception.EmailAlreadyExistsException;
-import com.financial.transaction.system.exception.MobileNumberAlreadyExistsException;
 import com.financial.transaction.system.exception.UserDoesNotExist;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
 import com.financial.transaction.system.service.UserService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     UserService userService;
@@ -23,7 +27,7 @@ public class UserController {
         try {
             response = userService.addUser(userRequestDTO);
         } catch (Exception e) {
-            System.out.println("Exception while adding user");
+            LOG.info("Exception while adding user: {}", e.getLocalizedMessage());
         }
         return response;
     }
@@ -35,7 +39,7 @@ public class UserController {
         try {
             return userService.deleteUserByUserId(userId);
         } catch (UserDoesNotExist e) {
-            System.out.println("Exception while deleting user with Id : " + userId);
+            LOG.info("Exception while deleting user with Id : {}", userId);
             return message;
         }
     }
@@ -47,7 +51,7 @@ public class UserController {
         try {
             return userService.getByUserId(userId);
         } catch (UserDoesNotExist e) {
-            System.out.println("Exception while getting user of userId : " + userId);
+            LOG.info("Exception while getting user of userId : {}", userId);
         }
         return response;
     }
