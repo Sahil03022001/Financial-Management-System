@@ -25,6 +25,7 @@
 		<module>account-management-service</module>
 		<module>user-management-service</module>
 		<module>notification-management-service</module>
+		<module>base</module>
 	</modules>
 	<scm>
 		<connection/>

@@ -17,9 +17,9 @@ public class KafkaProducer {
     public void publishEvent(String topicName, String key, Object payload) {
         try {
             kafkaTemplate.send(topicName, key, payload);
+            LOG.info("Published event to topic: {} with payload: {}", topicName, payload);
         } catch (Exception e) {
             LOG.info("Failed to send message to kafka : {}", e.getLocalizedMessage());
         }
-        LOG.info("Published event to topic: {} with payload: {}", topicName, payload);
     }
 }

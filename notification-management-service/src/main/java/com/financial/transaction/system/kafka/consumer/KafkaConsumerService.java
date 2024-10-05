@@ -1,5 +1,7 @@
 package com.financial.transaction.system.kafka.consumer;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.financial.transaction.system.entity.User;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -13,8 +15,10 @@ public class KafkaConsumerService {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaConsumerService.class);
 
+    private final ObjectMapper mapper = new ObjectMapper();
+
     @KafkaListener(topics = "user-change-topic", groupId = "{spring.kafka.consumer.group-id}")
-    public void consume(UserResponseDTO object) {
-        LOG.info("Received Object: {}", object);
+    public void consume(UserResponseDTO data) {
+        LOG.info("Received Data: {}", data);
     }
 }
