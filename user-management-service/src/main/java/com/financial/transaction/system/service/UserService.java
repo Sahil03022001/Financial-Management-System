@@ -5,6 +5,7 @@ import com.financial.transaction.system.entity.User;
 import com.financial.transaction.system.exception.EmailAlreadyExistsException;
 import com.financial.transaction.system.exception.MobileNumberAlreadyExistsException;
 import com.financial.transaction.system.exception.UserDoesNotExist;
+import com.financial.transaction.system.kafka.publisher.UserChangeEventPublisher;
 import com.financial.transaction.system.repository.UserRepository;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.responseDTO.UserResponseDTO;
@@ -17,6 +18,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserChangeEventPublisher userChangeEventPublisher;
 
     public UserResponseDTO addUser(UserRequestDTO userRequestDTO) throws MobileNumberAlreadyExistsException, EmailAlreadyExistsException {
 
@@ -35,7 +39,11 @@ public class UserService {
         User user = UserConvertor.userRequestDtoToUser(userRequestDTO);
         userRepository.save(user);
 
-        return UserConvertor.userToUserResponseDto(user);
+        UserResponseDTO responseDTO = UserConvertor.userToUserResponseDto(user);
+
+        userChangeEventPublisher.publishUserChangeEventToKafka(responseDTO);
+
+        return responseDTO;
     }
 
     @Transactional

@@ -24,6 +24,8 @@
 	<modules>
 		<module>account-management-service</module>
 		<module>user-management-service</module>
+		<module>notification-management-service</module>
+		<module>base</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -42,6 +44,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
