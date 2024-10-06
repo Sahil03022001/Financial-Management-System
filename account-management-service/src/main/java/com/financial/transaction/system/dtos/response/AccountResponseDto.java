@@ -17,7 +17,7 @@ public class AccountResponseDto {
 
     private String accountNumber;
     private String userId;
-    private String balance;
+    private Long balance;
     private CurrencyType currencyType;
     private AccountStatus accountStatus;
     private Date created;
