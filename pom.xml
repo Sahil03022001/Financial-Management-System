@@ -22,10 +22,10 @@
 		<developer/>
 	</developers>
 	<modules>
-		<module>account-management-service</module>
-		<module>user-management-service</module>
-		<module>notification-management-service</module>
 		<module>base</module>
+		<module>user-management-service</module>
+		<module>account-management-service</module>
+		<module>notification-management-service</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -70,14 +70,5 @@
 		</dependency>
 
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>

@@ -2,12 +2,11 @@ package com.financial.transaction.system.convertor;
 
 import com.financial.transaction.system.entity.User;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
-import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import com.financial.transaction.system.response.UserResponseDto;
 import com.financial.transaction.system.utils.UtilsManager;
 import lombok.experimental.UtilityClass;
 
 import java.util.Date;
-import java.util.UUID;
 
 @UtilityClass
 public class UserConvertor {
@@ -28,9 +27,9 @@ public class UserConvertor {
                 .build();
     }
 
-    public static UserResponseDTO userToUserResponseDto(User user){
+    public static UserResponseDto userToUserResponseDto(User user){
 
-        return UserResponseDTO.builder()
+        return UserResponseDto.builder()
                 .userId(user.getUserId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())

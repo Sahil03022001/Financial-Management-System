@@ -8,7 +8,7 @@ import com.financial.transaction.system.exception.UserDoesNotExist;
 import com.financial.transaction.system.kafka.publisher.UserChangeEventPublisher;
 import com.financial.transaction.system.repository.UserRepository;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
-import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import com.financial.transaction.system.response.UserResponseDto;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class UserService {
     @Autowired
     UserChangeEventPublisher userChangeEventPublisher;
 
-    public UserResponseDTO addUser(UserRequestDTO userRequestDTO) throws MobileNumberAlreadyExistsException, EmailAlreadyExistsException {
+    public UserResponseDto addUser(UserRequestDTO userRequestDTO) throws MobileNumberAlreadyExistsException, EmailAlreadyExistsException {
 
         //CHECKS FOR MOBILE NUMBER AND EMAIL
 
@@ -39,7 +39,7 @@ public class UserService {
         User user = UserConvertor.userRequestDtoToUser(userRequestDTO);
         userRepository.save(user);
 
-        UserResponseDTO responseDTO = UserConvertor.userToUserResponseDto(user);
+        UserResponseDto responseDTO = UserConvertor.userToUserResponseDto(user);
 
         userChangeEventPublisher.publishUserChangeEventToKafka(responseDTO);
 
@@ -62,7 +62,7 @@ public class UserService {
         return toReturn;
     }
 
-    public UserResponseDTO getByUserId(String userId) throws UserDoesNotExist {
+    public UserResponseDto getByUserId(String userId) throws UserDoesNotExist {
 
         User user = userRepository.findByUserId(userId);
 
@@ -70,7 +70,7 @@ public class UserService {
             throw new UserDoesNotExist("User does not exist.");
         }
 
-        UserResponseDTO userResponseDTO = UserConvertor.userToUserResponseDto(user);
+        UserResponseDto userResponseDTO = UserConvertor.userToUserResponseDto(user);
 
         return userResponseDTO;
     }
