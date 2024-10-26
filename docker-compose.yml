@@ -1,0 +1,106 @@
+version: '3.8'
+
+services:
+  # Zookeeper
+  zookeeper:
+    image: zookeeper:latest
+    ports:
+      - "2181:2181"
+
+  # Kafka
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+
+  # MySQL for User Management Service
+  user-management-db:
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: userdb
+      MYSQL_USER: userdbuser
+      MYSQL_PASSWORD: userdbpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - user-management-db-data:/var/lib/mysql
+
+  # MySQL for Account Management Service
+  account-management-db:
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: accountdb
+      MYSQL_USER: accountdbuser
+      MYSQL_PASSWORD: accountdbpassword
+    ports:
+      - "3308:3306"
+    volumes:
+      - account-management-db-data:/var/lib/mysql
+
+  # MySQL for Notification Management Service (if needed)
+  notification-management-db:
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: notificationdb
+      MYSQL_USER: notificationdbuser
+      MYSQL_PASSWORD: notificationdbpassword
+    ports:
+      - "3309:3306"
+    volumes:
+      - notification-management-db-data:/var/lib/mysql
+
+  # User Management Service
+  user-management-service:
+    build: ./user-management-service
+    depends_on:
+      - kafka
+      - user-management-db
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://user-management-db:3306/userdb
+      SPRING_DATASOURCE_USERNAME: userdbuser
+      SPRING_DATASOURCE_PASSWORD: userdbpassword
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  # Account Management Service
+  account-management-service:
+    build: ./account-management-service
+    depends_on:
+      - kafka
+      - account-management-db
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://account-management-db:3306/accountdb
+      SPRING_DATASOURCE_USERNAME: accountdbuser
+      SPRING_DATASOURCE_PASSWORD: accountdbpassword
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+  # Notification Management Service
+  notification-management-service:
+    build: ./notification-management-service
+    depends_on:
+      - kafka
+      - notification-management-db  # Only if it uses a database
+    ports:
+      - "8083:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://notification-management-db:3306/notificationdb  # If using a DB
+      SPRING_DATASOURCE_USERNAME: notificationdbuser
+      SPRING_DATASOURCE_PASSWORD: notificationdbpassword
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
+volumes:
+  user-management-db-data:
+  account-management-db-data:
+  notification-management-db-data:

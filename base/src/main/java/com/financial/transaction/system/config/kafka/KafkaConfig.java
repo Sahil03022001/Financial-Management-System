@@ -4,7 +4,6 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -23,7 +22,7 @@ public class KafkaConfig {
 
     private final Integer noOfThreads = 5;
 
-    private final String bootStrapServer = "localhost:9092";
+    private final String bootStrapServer = "kafka:9092";
 
     // Consumer configuration
     @Bean

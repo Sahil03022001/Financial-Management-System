@@ -2,7 +2,7 @@ package com.financial.transaction.system.controller;
 
 import com.financial.transaction.system.exception.UserDoesNotExist;
 import com.financial.transaction.system.requestDTO.UserRequestDTO;
-import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import com.financial.transaction.system.response.UserResponseDto;
 import com.financial.transaction.system.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +22,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public UserResponseDTO addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        UserResponseDTO response = new UserResponseDTO();
+    public UserResponseDto addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        UserResponseDto response = new UserResponseDto();
         try {
             response = userService.addUser(userRequestDTO);
         } catch (Exception e) {
@@ -45,9 +45,9 @@ public class UserController {
     }
 
     @GetMapping("/getByUserId")
-    public UserResponseDTO getByUserId(@RequestParam String userId) {
+    public UserResponseDto getByUserId(@RequestParam String userId) {
 
-        UserResponseDTO response = new UserResponseDTO();
+        UserResponseDto response = new UserResponseDto();
         try {
             return userService.getByUserId(userId);
         } catch (UserDoesNotExist e) {

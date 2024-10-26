@@ -1,7 +1,7 @@
 package com.financial.transaction.system.kafka.publisher;
 
 import com.financial.transaction.system.kafka.producer.KafkaProducer;
-import com.financial.transaction.system.responseDTO.UserResponseDTO;
+import com.financial.transaction.system.response.UserResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,7 @@ public class UserChangeEventPublisher {
     @Autowired
     KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Autowired
-    KafkaProducer kafkaProducer;
-
-    public void publishUserChangeEventToKafka(UserResponseDTO userResponseDTO) {
-//        kafkaProducer.publishEvent(userChangeTopic, userResponseDTO.getUserId(), userResponseDTO);
+    public void publishUserChangeEventToKafka(UserResponseDto userResponseDTO) {
         try {
             kafkaTemplate.send(userChangeTopic, userResponseDTO.getUserId(), userResponseDTO);
             LOG.info("Published event to topic: {} with payload: {}", userChangeTopic, userResponseDTO);
