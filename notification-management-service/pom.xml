@@ -19,9 +19,8 @@
     <dependencies>
         <dependency>
             <groupId>com.financial.transaction.system</groupId>
-            <artifactId>user-management-service</artifactId>
+            <artifactId>base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>

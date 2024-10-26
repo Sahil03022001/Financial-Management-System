@@ -4,6 +4,9 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -20,13 +23,17 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
+    private static final Logger LOG = LoggerFactory.getLogger(KafkaConfig.class);
+
     private final Integer noOfThreads = 5;
 
-    private final String bootStrapServer = "kafka:9092";
+    @Value("${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}")
+    private String bootStrapServer;
 
     // Consumer configuration
     @Bean
     public ConsumerFactory<String, Object> consumerFactory() {
+        LOG.info("Using KafkaConfig Consumer Props");
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -51,6 +58,7 @@ public class KafkaConfig {
     // Producer configuration
     @Bean
     public ProducerFactory<String, Object> producerFactory() {
+        LOG.info("Using KafkaConfig Producer Props");
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

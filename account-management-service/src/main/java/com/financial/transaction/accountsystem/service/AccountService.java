@@ -18,8 +18,6 @@ public class AccountService {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccountService.class);
 
-    private final String GET_USER_RESPONSE = "/user/getByUserId";
-
     @Autowired
     AccountRepository accountRepository;
 
