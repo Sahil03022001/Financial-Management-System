@@ -3,6 +3,7 @@ package com.financial.transaction.accountsystem.service;
 import com.financial.transaction.accountsystem.dtos.request.AccountRequestDto;
 import com.financial.transaction.accountsystem.dtos.response.AccountResponseDto;
 import com.financial.transaction.accountsystem.entity.Account;
+import com.financial.transaction.accountsystem.enums.AccountStatus;
 import com.financial.transaction.accountsystem.repository.AccountRepository;
 import com.financial.transaction.accountsystem.utils.AccountUtilsManager;
 import com.financial.transaction.system.response.UserResponseDto;
@@ -40,9 +41,12 @@ public class AccountService {
             account.setAccountType(request.getAccountType());
             account.setCurrencyType(request.getCurrencyType());
             account.setCreated(new Date());
+            account.setAccountStatus(AccountStatus.ACTIVE);
         }
         account.setBalance(request.getBalance());
         account.setUpdated(new Date());
+
+        accountRepository.save(account);
 
         return new AccountResponseDto(account.getAccountNumber(), account.getUserId(), account.getBalance(),
                 account.getCurrencyType(), account.getAccountStatus(), account.getCreated(), account.getUpdated());

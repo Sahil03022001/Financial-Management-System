@@ -14,7 +14,7 @@ public class UserServiceClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceClient.class);
 
-    private final String userServiceBaseUrl = "http://localhost:8081/user";
+    private final String userServiceBaseUrl = "http://user-management-service:8080/user";
 
     @Autowired
     GenericApiService genericApiService;
