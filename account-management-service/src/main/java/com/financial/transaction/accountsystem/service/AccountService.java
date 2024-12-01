@@ -51,4 +51,19 @@ public class AccountService {
         return new AccountResponseDto(account.getAccountNumber(), account.getUserId(), account.getBalance(),
                 account.getCurrencyType(), account.getAccountStatus(), account.getCreated(), account.getUpdated());
     }
+
+    public AccountResponseDto getAccountById(String accountNumber) throws Exception {
+
+        if (accountNumber == null) {
+            throw new Exception("Provided Account number is null");
+        }
+
+        Account account = accountRepository.findByAccountNumber(accountNumber);
+        if (account == null) {
+            throw new Exception("Account does not exists with provided account number");
+        }
+
+        return new AccountResponseDto(account.getAccountNumber(), account.getUserId(), account.getBalance(),
+                account.getCurrencyType(), account.getAccountStatus(), account.getCreated(), account.getUpdated());
+    }
 }
