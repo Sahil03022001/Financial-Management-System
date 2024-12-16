@@ -1,7 +1,7 @@
-package com.financial.transaction.accountsystem.dtos.response;
+package com.financial.transaction.system.response;
 
-import com.financial.transaction.accountsystem.enums.AccountStatus;
-import com.financial.transaction.accountsystem.enums.CurrencyType;
+import com.financial.transaction.system.enums.AccountStatus;
+import com.financial.transaction.system.enums.CurrencyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountResponseDto {
+public class AccountResponseDto extends Response {
 
     private String accountNumber;
     private String userId;

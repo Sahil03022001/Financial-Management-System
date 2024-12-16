@@ -1,15 +1,15 @@
-package com.financial.transaction.accountsystem.service;
+package com.financial.transaction.system.service;
 
 import com.financial.transaction.system.response.UserResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Service
+@Component
 public class UserServiceClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceClient.class);

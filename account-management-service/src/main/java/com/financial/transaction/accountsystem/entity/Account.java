@@ -1,8 +1,8 @@
 package com.financial.transaction.accountsystem.entity;
 
-import com.financial.transaction.accountsystem.enums.AccountStatus;
-import com.financial.transaction.accountsystem.enums.AccountType;
-import com.financial.transaction.accountsystem.enums.CurrencyType;
+import com.financial.transaction.system.enums.AccountStatus;
+import com.financial.transaction.system.enums.AccountType;
+import com.financial.transaction.system.enums.CurrencyType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

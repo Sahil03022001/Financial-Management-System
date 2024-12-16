@@ -1,12 +1,13 @@
 package com.financial.transaction.accountsystem.service;
 
-import com.financial.transaction.accountsystem.dtos.request.AccountRequestDto;
-import com.financial.transaction.accountsystem.dtos.response.AccountResponseDto;
+import com.financial.transaction.system.requests.AccountRequestDto;
+import com.financial.transaction.system.response.AccountResponseDto;
 import com.financial.transaction.accountsystem.entity.Account;
-import com.financial.transaction.accountsystem.enums.AccountStatus;
+import com.financial.transaction.system.enums.AccountStatus;
 import com.financial.transaction.accountsystem.repository.AccountRepository;
 import com.financial.transaction.accountsystem.utils.AccountUtilsManager;
 import com.financial.transaction.system.response.UserResponseDto;
+import com.financial.transaction.system.service.UserServiceClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

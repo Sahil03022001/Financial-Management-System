@@ -1,4 +1,4 @@
-package com.financial.transaction.accountsystem.enums;
+package com.financial.transaction.system.enums;
 
 public enum AccountType {
 

@@ -1,7 +1,7 @@
 package com.financial.transaction.accountsystem.controller;
 
-import com.financial.transaction.accountsystem.dtos.request.AccountRequestDto;
-import com.financial.transaction.accountsystem.dtos.response.AccountResponseDto;
+import com.financial.transaction.system.requests.AccountRequestDto;
+import com.financial.transaction.system.response.AccountResponseDto;
 import com.financial.transaction.accountsystem.service.AccountService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;

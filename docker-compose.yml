@@ -58,6 +58,19 @@ services:
     volumes:
       - notification-management-db-data:/var/lib/mysql
 
+  # MySQL for transaction Management Service (if needed)
+  transaction-management-db:
+    image: mysql:8.0.32
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: transactiondb
+      MYSQL_USER: transactiondbuser
+      MYSQL_PASSWORD: transactiondbpassword
+    ports:
+      - "3310:3306"
+    volumes:
+      - transaction-management-db-data:/var/lib/mysql
+
   # User Management Service
   user-management-service:
     build: ./user-management-service
@@ -103,7 +116,23 @@ services:
       SPRING_DATASOURCE_PASSWORD: notificationdbpassword
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
+  # Notification Management Service
+  transaction-management-service:
+    build: ./transaction-management-service
+    depends_on:
+      - kafka
+      - transaction-management-db  # Only if it uses a database
+    ports:
+      - "8084:8080"
+      - "5008:5005" # Debugger port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://transaction-management-db:3306/transactiondb  # If using a DB
+      SPRING_DATASOURCE_USERNAME: transactiondbuser
+      SPRING_DATASOURCE_PASSWORD: transactiondbpassword
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
 volumes:
   user-management-db-data:
   account-management-db-data:
   notification-management-db-data:
+  transaction-management-db-data:

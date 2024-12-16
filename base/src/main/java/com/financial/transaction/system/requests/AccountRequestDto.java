@@ -1,7 +1,7 @@
-package com.financial.transaction.accountsystem.dtos.request;
+package com.financial.transaction.system.requests;
 
-import com.financial.transaction.accountsystem.enums.AccountType;
-import com.financial.transaction.accountsystem.enums.CurrencyType;
+import com.financial.transaction.system.enums.AccountType;
+import com.financial.transaction.system.enums.CurrencyType;
 import jakarta.validation.constraints.NotBlank;
 
 public class AccountRequestDto {
@@ -65,5 +65,16 @@ public class AccountRequestDto {
 
     public void setCurrencyType(CurrencyType currencyType) {
         this.currencyType = currencyType;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountRequestDto{" +
+                "userId='" + userId + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", accountType=" + accountType +
+                ", balance=" + balance +
+                ", currencyType=" + currencyType +
+                '}';
     }
 }
