@@ -1,4 +1,4 @@
-package com.financial.transaction.system.exception;
+package com.financial.transaction.usersystem.exception;
 
 public class MobileNumberAlreadyExistsException extends Exception{
 

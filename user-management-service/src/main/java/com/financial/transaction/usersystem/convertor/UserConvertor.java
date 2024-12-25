@@ -1,9 +1,9 @@
-package com.financial.transaction.system.convertor;
+package com.financial.transaction.usersystem.convertor;
 
-import com.financial.transaction.system.entity.User;
-import com.financial.transaction.system.requestDTO.UserRequestDTO;
+import com.financial.transaction.usersystem.entity.User;
+import com.financial.transaction.usersystem.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.response.UserResponseDto;
-import com.financial.transaction.system.utils.UtilsManager;
+import com.financial.transaction.usersystem.utils.UtilsManager;
 import lombok.experimental.UtilityClass;
 
 import java.util.Date;

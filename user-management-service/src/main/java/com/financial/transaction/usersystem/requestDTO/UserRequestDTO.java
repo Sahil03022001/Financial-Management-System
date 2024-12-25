@@ -1,4 +1,4 @@
-package com.financial.transaction.system.requestDTO;
+package com.financial.transaction.usersystem.requestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;

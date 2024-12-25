@@ -1,4 +1,4 @@
-package com.financial.transaction.system.enums;
+package com.financial.transaction.usersystem.enums;
 
 public enum KafkaTopics {
     USER_CHANGE_TOPIC("user.change.topic");

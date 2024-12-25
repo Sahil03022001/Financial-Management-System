@@ -1,4 +1,4 @@
-package com.financial.transaction.system.utils;
+package com.financial.transaction.usersystem.utils;
 
 import lombok.experimental.UtilityClass;
 

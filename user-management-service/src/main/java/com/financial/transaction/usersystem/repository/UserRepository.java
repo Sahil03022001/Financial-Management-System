@@ -1,6 +1,6 @@
-package com.financial.transaction.system.repository;
+package com.financial.transaction.usersystem.repository;
 
-import com.financial.transaction.system.entity.User;
+import com.financial.transaction.usersystem.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

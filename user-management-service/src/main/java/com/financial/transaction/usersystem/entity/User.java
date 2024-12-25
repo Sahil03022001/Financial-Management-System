@@ -1,4 +1,4 @@
-package com.financial.transaction.system.entity;
+package com.financial.transaction.usersystem.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

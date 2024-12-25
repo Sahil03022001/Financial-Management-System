@@ -1,12 +1,11 @@
-package com.financial.transaction.system.controller;
+package com.financial.transaction.usersystem.controller;
 
-import com.financial.transaction.system.exception.UserDoesNotExist;
-import com.financial.transaction.system.requestDTO.UserRequestDTO;
+import com.financial.transaction.usersystem.exception.UserDoesNotExist;
+import com.financial.transaction.usersystem.requestDTO.UserRequestDTO;
 import com.financial.transaction.system.requests.AccountRequestDto;
 import com.financial.transaction.system.response.AccountResponseDto;
-import com.financial.transaction.system.response.Response;
 import com.financial.transaction.system.response.UserResponseDto;
-import com.financial.transaction.system.service.UserService;
+import com.financial.transaction.usersystem.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

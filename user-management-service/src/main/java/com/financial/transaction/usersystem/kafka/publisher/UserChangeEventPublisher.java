@@ -1,6 +1,5 @@
-package com.financial.transaction.system.kafka.publisher;
+package com.financial.transaction.usersystem.kafka.publisher;
 
-import com.financial.transaction.system.kafka.producer.KafkaProducer;
 import com.financial.transaction.system.response.UserResponseDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
