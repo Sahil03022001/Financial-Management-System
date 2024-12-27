@@ -7,7 +7,7 @@ import com.financial.transaction.usersystem.exception.MobileNumberAlreadyExistsE
 import com.financial.transaction.usersystem.exception.UserDoesNotExist;
 import com.financial.transaction.usersystem.kafka.publisher.UserChangeEventPublisher;
 import com.financial.transaction.usersystem.repository.UserRepository;
-import com.financial.transaction.usersystem.requestDTO.UserRequestDTO;
+import com.financial.transaction.system.requests.UserRequestDTO;
 import com.financial.transaction.system.requests.AccountRequestDto;
 import com.financial.transaction.system.response.AccountResponseDto;
 import com.financial.transaction.system.response.UserResponseDto;

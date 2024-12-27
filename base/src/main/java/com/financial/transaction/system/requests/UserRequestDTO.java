@@ -1,4 +1,4 @@
-package com.financial.transaction.usersystem.requestDTO;
+package com.financial.transaction.system.requests;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
@@ -32,5 +32,5 @@ public class UserRequestDTO {
     @Past(message = "Date of birth must be a past date")
     private Date dateOfBirth;
 
-    private String address;
+    private String password;
 }

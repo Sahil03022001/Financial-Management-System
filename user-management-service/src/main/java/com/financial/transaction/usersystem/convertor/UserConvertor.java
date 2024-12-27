@@ -1,7 +1,7 @@
 package com.financial.transaction.usersystem.convertor;
 
 import com.financial.transaction.usersystem.entity.User;
-import com.financial.transaction.usersystem.requestDTO.UserRequestDTO;
+import com.financial.transaction.system.requests.UserRequestDTO;
 import com.financial.transaction.system.response.UserResponseDto;
 import com.financial.transaction.usersystem.utils.UtilsManager;
 import lombok.experimental.UtilityClass;
@@ -21,7 +21,6 @@ public class UserConvertor {
                 .dateOfBirth(userRequestDTO.getDateOfBirth())
                 .email(userRequestDTO.getEmail())
                 .mobNo(userRequestDTO.getMobNo())
-                .address(userRequestDTO.getAddress())
                 .created(new Date())
                 .updated(new Date())
                 .build();
@@ -35,7 +34,6 @@ public class UserConvertor {
                 .lastName(user.getLastName())
                 .mobNo(user.getMobNo())
                 .email(user.getEmail())
-                .address(user.getAddress())
                 .dateOfBirth(user.getDateOfBirth())
                 .build();
     }

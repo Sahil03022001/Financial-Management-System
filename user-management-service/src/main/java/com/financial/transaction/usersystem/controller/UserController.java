@@ -1,7 +1,7 @@
 package com.financial.transaction.usersystem.controller;
 
 import com.financial.transaction.usersystem.exception.UserDoesNotExist;
-import com.financial.transaction.usersystem.requestDTO.UserRequestDTO;
+import com.financial.transaction.system.requests.UserRequestDTO;
 import com.financial.transaction.system.requests.AccountRequestDto;
 import com.financial.transaction.system.response.AccountResponseDto;
 import com.financial.transaction.system.response.UserResponseDto;

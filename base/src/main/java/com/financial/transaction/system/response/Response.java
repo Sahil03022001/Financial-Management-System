@@ -1,11 +1,12 @@
 package com.financial.transaction.system.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Response {
 
     private boolean successful;
-    private List<String> errors;
+    private List<String> errors = new ArrayList<>();
 
     public Response() {
     }

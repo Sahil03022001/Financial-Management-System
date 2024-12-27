@@ -37,8 +37,6 @@ public class User {
     //Format -> yyyy-mm-dd
     private Date dateOfBirth;
 
-    private String address;
-
     private Date created;
 
     private Date updated;
