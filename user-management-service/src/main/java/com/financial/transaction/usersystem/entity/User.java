@@ -41,4 +41,6 @@ public class User {
 
     private Date updated;
 
+    private String password;
+
 }

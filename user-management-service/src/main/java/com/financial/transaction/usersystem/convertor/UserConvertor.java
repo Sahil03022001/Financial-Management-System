@@ -21,6 +21,7 @@ public class UserConvertor {
                 .dateOfBirth(userRequestDTO.getDateOfBirth())
                 .email(userRequestDTO.getEmail())
                 .mobNo(userRequestDTO.getMobNo())
+                .password(userRequestDTO.getPassword())
                 .created(new Date())
                 .updated(new Date())
                 .build();

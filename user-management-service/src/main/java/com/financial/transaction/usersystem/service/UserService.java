@@ -57,6 +57,8 @@ public class UserService {
 
         userChangeEventPublisher.publishUserChangeEventToKafka(responseDTO);
 
+        responseDTO.setSuccessful(true);
+
         return responseDTO;
     }
 
