@@ -26,7 +26,7 @@
 		<module>user-management-service</module>
 		<module>account-management-service</module>
 		<module>notification-management-service</module>
-	</modules>
+    </modules>
 	<scm>
 		<connection/>
 		<developerConnection/>

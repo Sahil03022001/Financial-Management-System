@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Builder
-public class UserResponseDto implements Serializable {
+public class UserResponseDto extends Response implements Serializable {
 
     private String userId;
 

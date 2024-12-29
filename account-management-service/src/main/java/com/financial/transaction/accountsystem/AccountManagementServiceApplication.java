@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.financial.transaction.system.config", "com.financial.transaction.accountsystem"})
+@ComponentScan(basePackages = {"com.financial.transaction.system", "com.financial.transaction.accountsystem"})
 public class AccountManagementServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AccountManagementServiceApplication.class, args);

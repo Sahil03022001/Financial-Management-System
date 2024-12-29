@@ -1,13 +1,13 @@
 package service;
 
-import com.financial.transaction.accountsystem.dtos.request.AccountRequestDto;
-import com.financial.transaction.accountsystem.dtos.response.AccountResponseDto;
+import com.financial.transaction.system.requests.AccountRequestDto;
+import com.financial.transaction.system.response.AccountResponseDto;
 import com.financial.transaction.accountsystem.entity.Account;
-import com.financial.transaction.accountsystem.enums.AccountType;
-import com.financial.transaction.accountsystem.enums.CurrencyType;
+import com.financial.transaction.system.enums.AccountType;
+import com.financial.transaction.system.enums.CurrencyType;
 import com.financial.transaction.accountsystem.repository.AccountRepository;
 import com.financial.transaction.accountsystem.service.AccountService;
-import com.financial.transaction.accountsystem.service.UserServiceClient;
+import com.financial.transaction.system.service.UserServiceClient;
 import com.financial.transaction.accountsystem.utils.AccountUtilsManager;
 import com.financial.transaction.system.response.UserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
