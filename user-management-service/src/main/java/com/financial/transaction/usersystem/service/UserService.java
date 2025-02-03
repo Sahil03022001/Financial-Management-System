@@ -1,5 +1,7 @@
 package com.financial.transaction.usersystem.service;
 
+import com.financial.transaction.system.requests.TransactionRequestByMobileNumberDto;
+import com.financial.transaction.system.response.TransactionResponseDto;
 import com.financial.transaction.usersystem.convertor.UserConvertor;
 import com.financial.transaction.usersystem.entity.User;
 import com.financial.transaction.usersystem.exception.EmailAlreadyExistsException;
@@ -105,5 +107,8 @@ public class UserService {
         }
 
         return accountServiceClient.createAccount(request);
+    }
+
+    public TransactionResponseDto transferMoneyToMobile(TransactionRequestByMobileNumberDto request) {
     }
 }

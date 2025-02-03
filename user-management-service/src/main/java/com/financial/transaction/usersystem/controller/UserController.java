@@ -1,5 +1,7 @@
 package com.financial.transaction.usersystem.controller;
 
+import com.financial.transaction.system.requests.TransactionRequestByMobileNumberDto;
+import com.financial.transaction.system.response.TransactionResponseDto;
 import com.financial.transaction.usersystem.exception.UserDoesNotExist;
 import com.financial.transaction.system.requests.UserRequestDTO;
 import com.financial.transaction.system.requests.AccountRequestDto;
@@ -12,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,4 +77,14 @@ public class UserController {
         }
     }
 
+    @PostMapping("/transferMoneyToMobile")
+    public ResponseEntity<TransactionResponseDto> transferMoneyToMobile(TransactionRequestByMobileNumberDto request) {
+        TransactionResponseDto response = new TransactionResponseDto();
+        try {
+            response = userService.transferMoneyToMobile(request);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
