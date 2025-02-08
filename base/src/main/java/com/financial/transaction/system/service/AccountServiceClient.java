@@ -24,7 +24,7 @@ public class AccountServiceClient {
     private static final Logger LOG = LoggerFactory.getLogger(AccountServiceClient.class);
 
     private final String accountServiceBaseUrl = "http://account-management-service:8080/account";
-    private final String transactionManagementBaseUrl = "http://account-management-service:8080/transaction"
+    private final String transactionManagementBaseUrl = "http://account-management-service:8080/transaction";
 
     @Autowired
     GenericApiService genericApiService;
