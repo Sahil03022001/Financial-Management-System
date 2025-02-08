@@ -1,5 +1,6 @@
 package com.financial.transaction.usersystem.service;
 
+import com.financial.transaction.system.requests.TransactionRequestByAccountNumber;
 import com.financial.transaction.system.requests.TransactionRequestByMobileNumberDto;
 import com.financial.transaction.system.response.TransactionResponseDto;
 import com.financial.transaction.usersystem.convertor.UserConvertor;
@@ -19,7 +20,11 @@ import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -31,9 +36,6 @@ public class UserService {
 
     @Autowired
     UserChangeEventPublisher userChangeEventPublisher;
-
-    @Autowired
-    GenericApiService genericApiService;
 
     @Autowired
     AccountServiceClient accountServiceClient;
@@ -109,6 +111,40 @@ public class UserService {
         return accountServiceClient.createAccount(request);
     }
 
-    public TransactionResponseDto transferMoneyToMobile(TransactionRequestByMobileNumberDto request) {
+    public TransactionResponseDto transferMoneyToMobile(TransactionRequestByMobileNumberDto request, String userId) throws UserDoesNotExist {
+        User user = userRepository.findByUserId(userId);
+        if (user == null) {
+            throw new UserDoesNotExist("User not found");
+        }
+
+        List<AccountResponseDto> accounts = accountServiceClient.getAccountsByUserId(userId);
+        if (accounts == null || accounts.isEmpty()) {
+            throw new RuntimeException("No accounts exists for user");
+        }
+
+        boolean isAccountNumberValid = false;
+        for (AccountResponseDto accountResponseDto : accounts) {
+            if (accountResponseDto.getAccountNumber() != null && accountResponseDto.getAccountNumber().equals(request.getSenderAccountNumber())) {
+                isAccountNumberValid = true;
+                break;
+            }
+        }
+
+        if (!isAccountNumberValid) {
+            throw new RuntimeException("Account number given in request does not belong to user");
+        }
+
+        AccountResponseDto receiverAccount = accountServiceClient.getAccountByMobileNumber(request.getReceiverMobileNumber());
+        if (receiverAccount == null || receiverAccount.getAccountNumber() == null) {
+            throw new RuntimeException("Receiver does not have account");
+        }
+
+        TransactionRequestByAccountNumber transactionRequestByAccountNumber = new TransactionRequestByAccountNumber();
+        transactionRequestByAccountNumber.setSenderAccountNumber(request.getSenderAccountNumber());
+        transactionRequestByAccountNumber.setReceiverAccountNumber(receiverAccount.getAccountNumber());
+        transactionRequestByAccountNumber.setAmount(request.getAmount());
+
+        TransactionResponseDto transactionResponse = accountServiceClient.transferMoney(transactionRequestByAccountNumber);
+        return transactionResponse;
     }
 }

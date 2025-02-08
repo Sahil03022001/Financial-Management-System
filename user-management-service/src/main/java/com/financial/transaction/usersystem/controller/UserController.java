@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -78,10 +80,18 @@ public class UserController {
     }
 
     @PostMapping("/transferMoneyToMobile")
-    public ResponseEntity<TransactionResponseDto> transferMoneyToMobile(TransactionRequestByMobileNumberDto request) {
+    public ResponseEntity<TransactionResponseDto> transferMoneyToMobile(@RequestBody TransactionRequestByMobileNumberDto request,
+                                                                        @AuthenticationPrincipal UserDetails userDetails) {
         TransactionResponseDto response = new TransactionResponseDto();
+        String userId = userDetails.getUsername();
+        if (userId == null) {
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         try {
-            response = userService.transferMoneyToMobile(request);
+            response = userService.transferMoneyToMobile(request, userId);
+            if (!response.isSuccessful()) {
+                return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+            }
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);

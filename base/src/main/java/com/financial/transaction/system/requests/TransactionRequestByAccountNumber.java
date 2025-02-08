@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionRequestByMobileNumberDto {
+public class TransactionRequestByAccountNumber {
 
-    private String receiverMobileNumber;
     private String senderAccountNumber;
+    private String receiverAccountNumber;
     private Long amount;
 }

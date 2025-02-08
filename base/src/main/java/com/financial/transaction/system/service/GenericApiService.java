@@ -1,6 +1,7 @@
 package com.financial.transaction.system.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -38,4 +39,12 @@ public class GenericApiService {
         ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, responseType, uriVariables);
         return response.getBody();
     }
+
+    public <T> T getForEntity(String url, ParameterizedTypeReference<T> responseType,
+                              Map<String, ?> uriVariables, HttpHeaders headers) {
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+        ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, entity, responseType, uriVariables);
+        return response.getBody();
+    }
+
 }
