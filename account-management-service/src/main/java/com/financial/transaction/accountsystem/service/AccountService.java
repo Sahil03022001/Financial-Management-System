@@ -13,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -66,5 +69,27 @@ public class AccountService {
 
         return new AccountResponseDto(account.getAccountNumber(), account.getUserId(), account.getBalance(),
                 account.getCurrencyType(), account.getAccountStatus(), account.getCreated(), account.getUpdated());
+    }
+
+    public List<AccountResponseDto> getAccountsByUserId(String userId) {
+
+        if (userId == null) {
+            throw new RuntimeException("user id is null");
+        }
+
+        UserResponseDto userResponseDto = userServiceClient.getUserByUserId(userId);
+        if (userResponseDto == null) {
+            throw new RuntimeException("user not found");
+        }
+
+        List<Account> accounts = accountRepository.findByUserId(userId);
+        if (accounts == null || accounts.size() == 0) {
+            throw new RuntimeException("no accounts exists for given user");
+        }
+
+        List<AccountResponseDto> accountResponseDtoList = accounts.stream().map(account -> new AccountResponseDto(account.getAccountNumber(), account.getUserId(), account.getBalance(),
+                account.getCurrencyType(), account.getAccountStatus(), account.getCreated(), account.getUpdated())).collect(Collectors.toList());
+
+        return accountResponseDtoList;
     }
 }

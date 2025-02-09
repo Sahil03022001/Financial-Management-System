@@ -1,5 +1,6 @@
 package com.financial.transaction.system.service;
 
+import com.financial.transaction.system.response.UserResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -46,5 +47,4 @@ public class GenericApiService {
         ResponseEntity<T> response = restTemplate.exchange(url, HttpMethod.GET, entity, responseType, uriVariables);
         return response.getBody();
     }
-
 }

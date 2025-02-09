@@ -24,7 +24,7 @@ public class AccountServiceClient {
     private static final Logger LOG = LoggerFactory.getLogger(AccountServiceClient.class);
 
     private final String accountServiceBaseUrl = "http://account-management-service:8080/account";
-    private final String transactionManagementBaseUrl = "http://account-management-service:8080/transaction";
+    private final String transactionServiceBaseUrl = "http://account-management-service:8080/transaction";
 
     @Autowired
     GenericApiService genericApiService;
@@ -53,7 +53,7 @@ public class AccountServiceClient {
     }
 
     public TransactionResponseDto transferMoney(TransactionRequestByAccountNumber request) {
-        String url = transactionManagementBaseUrl + "transact";
+        String url = transactionServiceBaseUrl + "/transact";
         return genericApiService.postForEntity(url, request, TransactionResponseDto.class, new HttpHeaders());
     }
 }

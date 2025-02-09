@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -41,6 +43,17 @@ public class AccountController {
         } catch (Exception e) {
             LOG.error("Exception while fetching account details of id: {}, {}", accountNumber, e.getLocalizedMessage());
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getAccountsByUserId")
+    public ResponseEntity<List<AccountResponseDto>> getAccountsByUserId(@RequestParam String userId) {
+        try {
+            List<AccountResponseDto> accountResponseDtoList = accountService.getAccountsByUserId(userId);
+            return ResponseEntity.ok(accountResponseDtoList);
+        } catch (Exception e) {
+            LOG.error("Exception while fetching account details of userId: {}, error: {}", userId, e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
